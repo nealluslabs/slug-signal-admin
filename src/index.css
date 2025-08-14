@@ -1,0 +1,457 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@96.2,300..700&display=swap');
+
+
+.welcomePage{
+  background-color:#000000 !important
+}
+
+.scrollMenu-network{
+  width:550px;
+  
+  display: flex;
+  gap:17px;
+  scrollbar-width: none;
+
+}
+
+.scrollMenu-network-item {
+   margin-right: 17px;
+}
+
+
+.scrollMenu-network-modal{
+  width:550px;
+  
+  display: flex;
+  gap:17px;
+  scrollbar-width: none;
+
+}
+
+.scrollMenu-network-modal-item {
+   margin-right: 8px;
+   box-shadow: 
+   -2px 2px 4px rgba(0, 0, 0, 0.3),   /* left */
+    2px 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+
+
+
+
+/*.scrollContainer {
+  scrollbar-width: none;
+}*/
+
+
+.custom-scroll {
+  scrollbar-width: 3px;             /* Firefox */
+  scrollbar-color: #2a282e rgba(100, 100, 100, 0.5);
+ 
+  overflow-y: auto;
+  max-height: 250px;
+  
+ 
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+.custom-scroll::-webkit-scrollbar {
+  width: 3px ;
+  background-color: rgba(100, 100, 100, 0.5);
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: white;
+  background: transparent;
+
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.3); /* Slightly visible */
+  border-radius: 10px;
+  border: 2px solid transparent; /* Space around thumb for rounded ends */
+  background-clip: content-box;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+
+
+.scrollMenu-cover-art-list{
+ width:1100px;
+  display: flex;
+  gap:10px;
+  scrollbar-width: none;
+ margin-bottom: 30px;
+
+}
+
+.scrollMenu-cover-art-list-item{
+   margin-right: 10px;
+   width:400px ;
+}
+
+.wave {
+    animation-name: wave-animation; /* Refers to the name of your @keyframes element below */
+    animation-duration: 2.1s; /* Change to speed up or slow down */
+    animation-iteration-count: infinite; /* Never stop waving :) */
+    transform-origin: 70% 70%; /* Pivot around the bottom-left palm */
+    display: inline-block;
+  }
+  
+  @keyframes wave-animation {
+    0% {
+      transform: rotate(0deg);
+    }
+    10% {
+      transform: rotate(14deg);
+    } /* The following five values can be played with to make the waving more or less extreme */
+    20% {
+      transform: rotate(-8deg);
+    }
+    30% {
+      transform: rotate(14deg);
+    }
+    40% {
+      transform: rotate(-4deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+    60% {
+      transform: rotate(0deg);
+    } /* Reset for the last half to pause */
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Poppins:wght@300;400;500;600&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,500;8..144,600;8..144,700;8..144,800&display=swap');
+
+*{ /*please please please do this before you start any frontend project - BUT NOT HERE
+    margin:0 ;
+    padding:0;
+    border:0;
+    outline:0;
+    box-sizing:border-box;
+    list-style: none;
+    text-decoration: none;
+
+    
+*/}
+
+html, body {
+  overflow-y: visible;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+/*body::-webkit-scrollbar {
+  display: none;
+  width:0.5px;
+}*/
+
+/* For Firefox */
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+
+/* WebKit browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 0px; /* set to 0px if you want it nearly invisible */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* or any color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* light, subtle thumb */
+  border-radius: 10px;
+}
+
+/* Firefox */
+html, body {
+  /*scrollbar-width: none;  */      /* makes scrollbar thinner */
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* thumb and track */
+}
+
+
+ /*this too ! you have to have a theming, if not you wont make if far as a front end dev*/
+:root {
+     --color-header:#272E41;
+    --color-bg: /*#1f1f38*/#0767A830;
+    --color-bg-nav: /*#1f1f38*//*#a1c8e4*/#0a001f;
+    --color-bg-variant:#2f015f;
+    --color-primary:/*#4db5ff*/#27374C;
+    
+    --color-primary-variant:#0767A8/*rgba(77,181,255,0.4)*/;
+    --color-button:#5561F3;
+    --color-light-bg:#f3f8ff;
+    --color-white:#fff;
+    --color-light:rgba(255,255,255,0.6);
+
+    --transition:all 400ms ease ;
+
+    --container-width-lg: 85%;
+    --container-width-md:85%;
+    --container-width-sm:90%;
+
+     --separator-line:0.1px solid #27374c1a;
+     --feature-shadow:  5px 2px 10px -3px rgba(0,0,0,0.75);
+
+   
+   
+}
+
+body{
+  background-color:#FFF !important
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+::webkit-scrollbar {
+    display:none;
+}
+
+
+
+
+/* ========================== GENERAL STYLES ========== */
+
+.container-hp {
+    width:var(--container-width-lg);
+    margin:0 auto;
+   
+}
+
+.welcomePage h1,
+.welcomePage h2,
+.welcomePage h3,
+.welcomePage h4,
+.welcomePage h5,
+.welcomePage h6 {
+    
+   /* font-family: 'Roboto Flex', sans-serif;*/
+}
+
+.welcomePage h1 {
+    font-size:3rem;
+    font-weight:700;
+    /*margin-bottom:2.5rem;*/
+}
+
+.welcomePage h2 {
+    font-size:2rem;
+    font-weight:700;
+    /*margin-bottom:2rem;*/
+
+}
+
+.welcomePage h3 {
+    font-size:1.8rem;
+    font-weight:600;
+    margin-bottom:1rem;
+    margin-top: 4rem;
+}
+
+.welcomePage h4,.welcomePage h5, .welcomePage h6 {
+    font-weight:600;
+}
+
+.welcomePage p {
+    margin-bottom:1rem; 
+}
+
+
+section {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+section > h1,
+section > h2,
+section > h5 {
+
+    text-align: center;
+    color: var(--color-primary)
+}
+
+
+
+
+section > h2 {
+    color:var(--color-primary);
+    /*margin-bottom: 3rem;*/
+
+}
+
+.text-light {
+    color: var(--color-white);
+}
+
+.text-accent {
+    color: #E88B1E;
+    font-weight: 600;
+}
+
+a { 
+    color:var(--color-primary);
+    transition:var(--transition);
+}
+
+.welcomePage .btn {
+  width:250px;  /* For text content this means that the content will not wrap at all even if it causes overflows  */
+  height:60px;
+  display:inline-block; 
+  background-color:  #D72A34;
+  color:white;
+  padding:0.75rem 1.2rem; 
+  cursor:pointer;
+  border-radius: 5px;
+  border:1px solid  #D72A34;
+  transition: var(--transition);
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.4rem;
+  font-family: "Inter";
+  font-weight: 800;
+  
+}
+
+
+.welcomePage .btn-recruiter {
+  width:250px;  /* For text content this means that the content will not wrap at all even if it causes overflows  */
+  height:60px;
+  display:inline-block; 
+  background-color: #3B4CA6;
+  border:1px solid #3B4CA6;
+  color:white;
+  padding:0.75rem 1.2rem; 
+  cursor:pointer;
+  border-radius: 0px;
+ 
+  transition: var(--transition);
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.4rem;
+  font-family: "Inter";
+  font-weight: 800;
+  
+}
+
+
+.welcomePage .btn-invisible {
+  width:250px;  /* For text content this means that the content will not wrap at all even if it causes overflows  */
+  height:60px;
+  display:inline-block; 
+  color: /*#E88B1E*/#000000;
+  padding:0.75rem 1.2rem; 
+  cursor:pointer;
+  border-radius: 0px;
+  border:0px solid #E88B1E;
+  transition: var(--transition);
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 1.4rem;
+  font-family: "Inter";
+  font-weight: 800;
+  
+}
+
+.welcomePage .btn-f{
+    width:350px;  /* For text content this means that the content will not wrap at all even if it causes overflows  */
+    display:inline-block; 
+    color: var(--color-white);
+    padding:0.75rem 1.2rem; 
+    cursor:pointer;
+    background-color: #CDCDCD;
+    border-radius: 0.4rem;
+    /*border:1px solid var(--color-bg-variant);*/
+    transition: var(--transition);
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .welcomePage .btn:hover {
+   /* background-color:#E88B1E;*/
+    color:var(--color-white);
+    border-color: transparent;
+
+}
+
+.welcomePage .btn-primary {
+   background-color: #2E2779;
+    color:var(--color-white); 
+
+}
+
+
+img-hp {
+    /*every image on this website is gonna be display block, i.e gonna occupy it's own line */
+    display:block; 
+    width:100%;
+   object-fit:cover;
+}
+
+/* ======================== MEDIA QUERIES (MEDIUM DEVICES) ======================*/
+
+@media screen and (max-width:1024px) {
+   .container-hp {
+     width: var(--container-width-md);
+   }
+
+   section {
+    margin-top:6rem;
+   }
+
+
+}
+
+
+
+/* ======================== MEDIA QUERIES (SMALL DEVICES) ======================*/
+
+@media screen and (max-width:600px) {
+    .container-hp {
+      width: var(--container-width-sm);
+    }
+ 
+    .section > h2 {
+     /*margin-bottom:2rem;*/
+    }
+
+
+    .welcomePage  h1 {
+        font-size:2.2rem;
+        font-weight:700;
+        /*margin-bottom:1.5rem;*/
+    }
+    
+    .welcomePage  h2 {
+        font-size:1.6rem;
+        font-weight:700;
+        /*margin-bottom:1.3rem;*/
+    
+    }
+    
+    .welcomePage  h3 {
+        font-size:1.3rem;
+        font-weight:600;
+        /*margin-bottom:1rem;
+        margin-top: 2rem;*/
+    }
+
+
+    
+ 
+ 
+ }

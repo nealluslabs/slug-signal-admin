@@ -1,0 +1,20 @@
+.Toastify__toast {
+    background-color: #252328 !important; /* Dark grey background */
+    color: #fff !important;           /* White font color */
+  }
+  
+  /* Success toast style */
+  .Toastify__toast--success {
+    /*background-color: #000 !important;*/ /* Black background */
+    background-color: #252328 !important; /* Dark grey background */
+    
+  }
+
+
+  .Toastify__progress-bar--success {
+    background-color: #A01565!important;
+}
+
+.Toastify__progress-bar--error {
+    background-color: #A01565 !important;
+}

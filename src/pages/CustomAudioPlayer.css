@@ -1,0 +1,37 @@
+.rhap_container {
+    background-color: black !important; /* Background color */
+  }
+  
+  .rhap_play-pause-button,
+  .rhap_skip-button,
+  .rhap_forward-button,
+  .rhap_rewind-button,
+  .rhap_repeat-button
+  {
+    color: #A01565 !important; /* Change play, pause, and skip icons */
+  }
+  
+  .rhap_progress-bar {
+    /*background: #A01565 !important;*/ /* Change progress bar background */
+  }
+  
+  .rhap_progress-filled {
+    background: #A01565 !important; /* Change progress fill color */
+  }
+  
+  .rhap_volume-bar {
+    background: #A01565 !important; /* Change volume bar color */
+  }
+  
+  .rhap_volume-button {
+    color: #A01565 !important; /* Change volume button color */
+  }
+
+  .rhap_progress-indicator, .rhap_volume-indicator {
+    background: #A01565 !important;
+  }
+
+  .rhap_time {
+    color: #FFF !important;
+  }
+  
