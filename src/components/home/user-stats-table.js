@@ -2,14 +2,7 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button, CircularProgress, Divider, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-
-//import redboy from 'src/assets/images/jeansfarmer.jpeg';
-//import greenboy from 'src/assets/images/farmer2.jpeg';
-//import athlete from 'src/assets/images/farmer3.jpeg';
-//import amfootball from 'src/assets/images/farmer4.jpeg';
-/*import  noimage from 'src/assets/images/no-image.jpg';*/
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
-
 
 import { saveFarmerInFocus } from 'src/redux/reducers/group.slice';
 import { useDispatch } from 'react-redux'
@@ -31,23 +24,31 @@ const useStyles = makeStyles({
 
 const columns = !isMobile
   ? [
+      /*{
+    field: 'id',
+    headerName: '#', 
+    width: 250,
+    renderCell: (params) => {
+    },
+  },*/
       {
-        field: 'title',
-        headerName: 'Campaign Name',
+        field: 'user',
+        headerName: 'Full Name',
         width: 270,
         height: 250,
         fontWeight: 700,
         // fontSize: '4rem',
-        renderCell: (params) => {
-          var returnStyle = (params) => {
-            return params.row.index;
+        renderCell: (user) => {
+          var returnStyle = (user) => {
+            return user;
           };
 
-          //const fullName = `${params.row.fName} ${params.row.lName}`;
+            const firstName =user?.firstName;
           return (
             <div
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100 }}
             >
+            
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <div>{/*THE NUMBERS SHOULD GO HERE */}</div>
               </div>
@@ -62,36 +63,37 @@ const columns = !isMobile
                   fontSize: '1rem',
                 }}
               >
-                {params.row.title.toUpperCase()}
+                {firstName.toUpperCase()}
               </span>
             </div>
           );
         },
       },
       {
-        field: 'startDate',
-        headerName: 'Start Date',
+        field: 'image',
+        headerName: 'Image',
         width: 290,
         height: 450,
         renderCell: (params) => {
           return (
-            <div style={{ fontSize: '1rem', color: 'black' }}>
+            <div style={{ fontSize: '1rem', color: 'black', width: 70, height: 70 }}>
               {' '}
-              {params.row.startDate && new Date(params.row.startDate).toDateString()}
+              {/* {params.row.startDate && new Date(params.row.startDate).toDateString()} */}
+              <img src={params.row.image} style={{borderRadius: 50}}/>
             </div>
           );
         },
       },
       {
-        field: 'endDate',
-        headerName: 'End Date',
+        field: 'email',
+        headerName: 'User Email',
         width: 290,
         height: 450,
         renderCell: (params) => {
           return (
             <div style={{ fontSize: '1rem', color: 'black' }}>
               {' '}
-              {params.row.startDate && new Date(params.row.endDate).toDateString()}
+              {params.row.email}
             </div>
           );
         },
@@ -105,8 +107,8 @@ const columns = !isMobile
     ]
   : [
       {
-        field: 'title',
-        headerName: 'Campaign Name',
+        field: 'user',
+        headerName: 'Full Name',
         width: 270,
         height: 250,
         fontSize: '3rem',
@@ -115,7 +117,7 @@ const columns = !isMobile
             return params.row.index;
           };
 
-          //const fullName = `${params.row.fName} ${params.row.lName}`;
+        //   const email = `${params.email}`;
           return (
             <div
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100 }}
@@ -134,7 +136,7 @@ const columns = !isMobile
                   fontSize: '1rem',
                 }}
               >
-                {params.row.title}
+                {/* {params.email} */}
               </span>
             </div>
           );
@@ -149,7 +151,7 @@ const columns = !isMobile
       },
     ];
 
-export default function FarmerStatsLong({ farmers }) {
+export default function UserStatsTable({ user }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -207,7 +209,7 @@ export default function FarmerStatsLong({ farmers }) {
           }}
           //getRowClassName={(params) => (classes.row)}
           onCellClick={handleCellClick}
-          rows={farmers}
+          rows={user}
           rowHeight={80}
           columns={columns.map((col, index) => {
             if (col.field === 'actions') {
@@ -218,6 +220,20 @@ export default function FarmerStatsLong({ farmers }) {
                     {
                       <Button
                         onClick={() => {
+                          //    setLoading(true)
+                          //    dispatch(saveFarmerInFocus(params.row))
+                          //    setTimeout(()=>{
+                          //
+                          //    navigate('/dashboard/farmer-profile')
+                          //
+                          //  },
+                          //    600)
+                          //    setTimeout(()=>{
+                          //
+                          //      setLoading(false)
+                          //
+                          //    },
+                          //      1000)
                         }}
                         variant="contained"
                         style={{ minWidth: '130px', backgroundColor: 'black', color: 'white', marginRight: '20px' }}
@@ -225,11 +241,10 @@ export default function FarmerStatsLong({ farmers }) {
                         {'View'}
                       </Button>
                     }
-
                   </div>
                 ),
               };
-            } else if (col.field === 'title') {
+            } else if (col.field === 'user') {
               return {
                 ...col,
                 renderCell: (params) => (
@@ -244,7 +259,6 @@ export default function FarmerStatsLong({ farmers }) {
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                       <div>{/*THE NUMBERS SHOULD GO HERE */}</div>
-                   
                     </div>
                     <span
                       style={{
@@ -256,7 +270,7 @@ export default function FarmerStatsLong({ farmers }) {
                         fontSize: '1rem',
                       }}
                     >
-                    {params.row.title
+                    {params.row.user
                       .split(" ")
                       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                       .join(" ")}                    

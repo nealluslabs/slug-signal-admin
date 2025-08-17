@@ -164,20 +164,20 @@ const Navbar = ({ active }) => {
           <Box sx={{ display: "flex" }}>
             <Box
               py={1} px={3} mx={1}
-              onClick={() => navigate("/home")}
+              onClick={() => navigate("/users")}
               sx={{ 
                 display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
                 borderRadius: "8px",
                 width:"max-content",
                 transition: "all 0.3s ease",
-                backgroundColor: active === "dashboard" ? "#D3D3D355" : "transparent",
+                backgroundColor: active === "users" ? "#D3D3D355" : "transparent",
                 "&:hover": {
-                  backgroundColor: active === "dashboard" ? "#D3D3D355" : "#D3D3D325"
+                  backgroundColor: active === "users" ? "#D3D3D355" : "#D3D3D325"
                 },
               }}
             >
               {/*<FaShare />*/}
-              <Typography sx={{ ml: 1 }}>Signals</Typography>
+              <Typography sx={{ ml: 1 }}>Users</Typography>
             </Box>
 
 
@@ -196,26 +196,26 @@ const Navbar = ({ active }) => {
               }}
             >
               <FaShare />
-              <Typography sx={{ ml: 1 }}>My Signals</Typography>
+              <Typography sx={{ ml: 1 }}>All Signals</Typography>
             </Box>
 
 
             <Box
               py={1} px={3} mx={1}
-              onClick={() => navigate("/campaign-analysis")}
+              onClick={() => navigate("/settings")}
               sx={{ 
                 display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
                 borderRadius: "8px",
                 width:"max-content",
                 transition: "all 0.3s ease",
-                backgroundColor: active === "campaign-analysis" ? "#D3D3D355" : "transparent",
+                backgroundColor: active === "settings" ? "#D3D3D355" : "transparent",
                 "&:hover": {
-                  backgroundColor: active === "campaign-analysis" ? "#D3D3D355" : "#D3D3D325"
+                  backgroundColor: active === "settings" ? "#D3D3D355" : "#D3D3D325"
                 },
               }}
             >
               {/*<FaShare />*/}
-              <Typography sx={{ ml: 1 }}>Analysis</Typography>
+              <Typography sx={{ ml: 1 }}>Settings</Typography>
             </Box>
 
             {/*<Box

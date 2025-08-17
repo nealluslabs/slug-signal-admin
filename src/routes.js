@@ -33,6 +33,7 @@ import CreateSignalsPage from './pages/CreateSignalsPage';
 import UpdateSignalsPage from './pages/UpdateSignalsPage';
 import SlugDash from './pages/SlugDash';
 import CampaignAnalysisPage from './pages/CampaignAnalysisPage';
+import SettingsPage from './pages/SettingsPage';
 
 export default function Router() {
   const routes = useRoutes([
@@ -79,6 +80,11 @@ export default function Router() {
     {
       path: 'register',
       element: <RegisterPage />,
+    },
+        {
+      path: '/settings',
+      
+      element: <SettingsPage />,
     },
     {
       path: '/',

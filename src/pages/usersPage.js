@@ -8,12 +8,12 @@ import { useState,useEffect } from "react";
 
 // Components
 import { DashboardSidebar, DashboardFeedComponent, DashboardRightbarComponent } from "src/SeperateComponent/Dashboard";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {  useNavigate } from "react-router-dom";
 import ScreenSearchComponent from "src/componentsMyNetwork/screenSearchComponent";
 import DisplayCard from "src/componentsMyNetwork/displayCard";
 import UserDisplayCard from "src/componentsMyNetwork/UserDisplayCard";
-
+import UserStatsTable from "src/components/home/user-stats-table";
 
 function UsersPage() {
   
@@ -43,6 +43,44 @@ const navigate = useNavigate()
 
   },[])
 
+const { allUsers, isLoading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+const dummyUsers = [
+  {
+    id: 1,
+    user: "Alice Johnson",
+    email: "alice.johnson@example.com",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    id: 2,
+    user: "Bob Smith",
+    email: "bob.smith@example.com",
+    image: "https://randomuser.me/api/portraits/men/46.jpg",
+  },
+  {
+    id: 3,
+    user: "Charlie Davis",
+    email: "charlie.davis@example.com",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+  },
+  {
+    id: 4,
+    user: "Diana Prince",
+    email: "diana.prince@example.com",
+    image: "https://randomuser.me/api/portraits/women/65.jpg",
+  },
+  {
+    id: 5,
+    user: "Ethan Clark",
+    email: "ethan.clark@example.com",
+    image: "https://randomuser.me/api/portraits/men/12.jpg",
+  },
+];
+
+
+
+console.log("Fetched All Users ===========>>>>>>>>>>", allUsers);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -50,6 +88,7 @@ const navigate = useNavigate()
         <Navbar active="users" />
 
         <ScreenSearchComponent title="Users" />
+ {/* <FarmerStatsLong farmers={pastCampaigns} /> */}
 
         <Box
           mx="88px"
@@ -59,7 +98,9 @@ const navigate = useNavigate()
             gap: 2, 
           }}
         >
-            <UserDisplayCard />
+            {/* <UserDisplayCard /> */}
+            <UserStatsTable user={dummyUsers}/>
+            
         </Box>
 
         {/* <Add /> */}

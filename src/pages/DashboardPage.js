@@ -21,6 +21,7 @@ import { fetchAllApprovedTrends } from "src/redux/actions/group.action";
 import { updateUserSignals } from "src/redux/actions/auth.action";
 import { FaPencil } from "react-icons/fa6";
 import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi2";
+import { useTheme, styled } from '@mui/material/styles';
 
 
 function DashboardPage() {

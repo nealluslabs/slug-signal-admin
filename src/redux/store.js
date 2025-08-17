@@ -11,6 +11,7 @@ import inboxReducer from './reducers/chat.slice';
 import transactionReducer from './reducers/transactions.slice';
 import campaignReducer from './reducers/campaign.slice'; 
 // import chatReducer from '../chat-src/redux/slices/chat';
+import userReducer from './reducers/user.slice'
 
 
 
@@ -23,6 +24,7 @@ const reducers = combineReducers({
   inbox: inboxReducer,
   transaction: transactionReducer,
   campaign: campaignReducer,
+  user: userReducer,
 });
 
 const persistConfig = {
