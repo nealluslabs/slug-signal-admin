@@ -146,7 +146,7 @@ export default function SettingsPage() {
       </Container>
       <Container
         maxWidth="xl"
-        style={{ width: '100%', backgroundColor: '#ffffff', fontFamily: 'Poppins' }}
+        style={{  marginLeft: '15%', width: 'calc(100% - 15%)', backgroundColor: '#ffffff', fontFamily: 'Poppins' }}
       >
         <br />
         <Grid container spacing={3}>

@@ -1,293 +1,240 @@
-import { 
-  Mail, Notifications, Diamond, Dashboard, Group, Message, Laptop, CalendarToday, KeyboardArrowDown, LibraryMusic,
-  Person, MusicNote, TaskAlt
-} from "@mui/icons-material";
+import React, { useState } from 'react';
+import { Box, Typography, Toolbar, styled } from '@mui/material';
+import { FaPowerOff } from 'react-icons/fa6';
+import { HiMenu } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { clearUser } from 'src/redux/reducers/auth.slice';
+import { notifySuccessFxn } from 'src/utils/toast-fxn';
+import { MdOutlineDashboard } from "react-icons/md";
+import { AiOutlineRead } from "react-icons/ai";
+import { AiTwotoneFolderOpen } from "react-icons/ai";
+import { CiSettings } from "react-icons/ci";
+import { TbLetterS } from "react-icons/tb";
+import { IoAnalytics } from "react-icons/io5";
 
-import { IoIosNotificationsOutline } from "react-icons/io";
-import { MdOutlineMessage } from "react-icons/md";
-import { TbMessage } from "react-icons/tb";
-
-// Share Icon
-import { FaPowerOff, FaShare } from "react-icons/fa6";
-import { TiFlowMerge } from "react-icons/ti";
-
-import {
-  AppBar,
-  Avatar,
-  Badge,
-  Box,
-  InputBase,
-  ToggleButtonGroup,
-  ToggleButton,
-  Menu,
-  MenuItem,
-  styled,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import React, { useRef, useState } from "react";
-
-// import Menu from '@mui/material/Menu';
-// import MenuItem from '@mui/material/MenuItem';
-
-// Navigation
-import { useNavigate } from "react-router-dom";
-
-// Logo Image
-import Logo from '../assets/images/logo/circle 1.png';
-import { logout } from "src/redux/actions/auth.action";
-import { useDispatch } from "react-redux";
-import { clearUser, logoutFxn } from "src/redux/reducers/auth.slice";
-import { notifySuccessFxn } from "src/utils/toast-fxn";
 
 const StyledToolbar = styled(Toolbar)({
-  display: "flex",
-  justifyContent: "space-between",
-  background:"white",
-  position:"relative",
-  color:"black"
-  //background:"white"
-
+  display: 'flex',
+  justifyContent: 'space-between',
+  // background: 'black',
+  position: 'relative',
+  alignItems: 'flex-start',
+  color: 'white',
 });
 
-const Search = styled("div")(({ theme }) => ({
-  backgroundColor: "white",
-  padding: "0 10px",
-  borderRadius: theme.shape.borderRadius,
-  width: "40%",
-}));
-
-const Icons = styled(Box)(({ theme }) => ({
-  display: "none",
-  alignItems: "center",
-  gap: "20px",
-  [theme.breakpoints.up("sm")]: {
-    display: "flex",
-  },
-}));
-
-const UserBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-  [theme.breakpoints.up("sm")]: {
-    display: "none",
-  },
-}));
 const Navbar = ({ active }) => {
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorEl2, setAnchorEl2] = React.useState(null);
-
-  const openClick = Boolean(anchorEl);
-
-  const openClick2 = Boolean(anchorEl2);
-
-  const handleClick = (event) => {
-    //setAnchorEl(event.currentTarget);
-    setAnchorEl(customAnchorRef.current);
-  };
-
-
-  const handleClick2 = (event) => {
-    setAnchorEl2(event.currentTarget);
-    setOpen(true)
-  };
-
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
-
-  const [alignment, setAlignment] = React.useState('web');
-
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
-
-
-  const notificationsList = [
-    { icon: <Person sx={{ color: "#E61484", marginRight: 2 }} />, title: "You have a new follower!", subtitle: "October 30 at 4:23PM" },
-    { icon: <Mail sx={{ color: "#E61484", marginRight: 2 }} />, title: "You have a new Message!", subtitle: "October 22 at 3:13PM" },
-    { icon: <MusicNote sx={{ color: "#E61484", marginRight: 2 }} />, title: "New music brief posted!", subtitle: "October 30 at 3:13PM" },
-    { icon: <MusicNote sx={{ color: "#E61484", marginRight: 2 }} />, title: "Your song has been posted", subtitle: "October 30 at 3:13PM" },
-    { icon: <MusicNote sx={{ color: "#E61484", marginRight: 2 }} />, title: "You've earned $10 in AudioVybez credit for inviting Jason Grant!", subtitle: "October 30 at 3:1 3PM" }
-  ]
-
   const navigate = useNavigate();
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const [open, setOpen] = useState(false);
-  const customAnchorRef = useRef(null);
-
-  console.log(active);
+  const handleOpenMobileNav = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <AppBar 
-      position="sticky"
-      sx={{ borderBottom: "0.5px solid grey", background: "white", boxShadow: "none" }}
-    >
-      <StyledToolbar>
-        {/* First Section  */}
-        
-        <Box
-          mx="80px"
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "2fr 1fr 2fr", // 3 columns
-            alignItems: "center",
-            width: "100%",
-          }}
-        >
-          {/* Left: Slug Signal (1/3) */}
+    <>
+      {/* Mobile toggle button */}
+
+      <Box
+        sx={{
+          display: { xs: 'block', lg: 'none' }, // Show only on mobile
+          position: 'fixed',
+          top: 16,
+          left: 16,
+          zIndex: 1300,
+          cursor: 'pointer',
+          backgroundColor: isOpen ? '#000' : '',
+          padding: '8px',
+          borderRadius: '4px',
+          // boxShadow: 3,
+        }}
+        onClick={handleOpenMobileNav}
+      >
+        {isOpen ? (
+          <Typography color="white" fontWeight="bold" fontSize="20px">
+            ✕
+          </Typography>
+        ) : (
+          <HiMenu size={24} color="black" />
+        )}
+      </Box>
+
+
+      {/* Sidebar */}
+      <Box
+        position="sticky"
+        sx={{
+          width: { lg: 'calc(100% - 84%)', sm: '150px' },
+          height: '100vh',
+          backgroundColor: 'black',
+          borderRight: '0.5px solid grey',
+          color: 'white',
+          display: { xs: isOpen ? 'flex' : 'none', md: 'flex' },
+          flexDirection: 'column',
+          alignItems: 'start',
+          justifyContent: 'flex-start',
+          // paddingHorizontal: 102,
+          paddingTop: 4,
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 1000,
+          transition: 'all 0.3s ease',
+        }}
+      >
+        {/* Close button */}
+        {isOpen && (
           <Box
-            sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}
-            onClick={() => navigate("/home")}
+            sx={{
+              display: { sm: 'flex', xl: 'none' },
+              alignSelf: 'flex-end',
+              cursor: 'pointer',
+              mb: 2,
+            }}
+            onClick={handleOpenMobileNav}
           >
-            <Typography
-              variant="h6"
-              sx={{
-                display: { xs: "none", sm: "inline" },
-                fontWeight: "bold",
-                cursor: "pointer",
-              }}
-            >
-              SLUG SIGNAL
-            </Typography>
+            {/* <Typography color="white">✕</Typography> */}
           </Box>
+        )}
 
-          {/* Center: Trends (2/3) */}
-          <Box sx={{ display: "flex" }}>
+        <StyledToolbar>
+          <Box
+            sx={{
+              //  width: 'calc(100% - 85%)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 2,
+              // backgroundColor: 'black',
+              // color: 'white',
+              marginTop: '20px',
+            }}
+          >
+           {/* Logo / Title */}
             <Box
-              py={1} px={3} mx={1}
-              onClick={() => navigate("/users")}
-              sx={{ 
-                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-                borderRadius: "8px",
-                width:"max-content",
-                transition: "all 0.3s ease",
-                backgroundColor: active === "users" ? "#D3D3D355" : "transparent",
-                "&:hover": {
-                  backgroundColor: active === "users" ? "#D3D3D355" : "#D3D3D325"
-                },
+              sx={{ display: 'flex', justifyContent:'center', alignItems: 'center', cursor: 'pointer', marginBottom: '20px',
+                // backgroundColor: 'green',
+              }}
+              onClick={() => {
+                navigate('/home');
+                setIsOpen(false);
               }}
             >
-              {/*<FaShare />*/}
-              <Typography sx={{ ml: 1 }}>Users</Typography>
+              <img src="/assets/av.png" alt="company logo" style={{ height: 55, width: 55, borderRadius: '1rem' }} />
+              {/* <TbLetterS size={30} /> */}
+
+              {/* <Typography
+                variant="h7"
+                sx={{
+                  display: { xs: 'none', sm: 'inline' },
+                  fontWeight: 'bold',
+                  width: '100%',
+                   cursor: 'pointer',
+                  // marginBottom: '80px',
+                }}
+              >
+                SLUG SIGNAL
+              </Typography> */}
             </Box>
 
-
-            <Box
-              py={1} px={3} mx={1}
-              onClick={() => navigate("/my-signals")}
-              sx={{ 
-                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-                borderRadius: "8px",
-                width:"max-content",
-                transition: "all 0.3s ease",
-                backgroundColor: active === "my-signals" ? "#D3D3D355" : "transparent",
-                "&:hover": {
-                  backgroundColor: active === "my-signals" ? "#D3D3D355" : "#D3D3D325"
-                },
-              }}
-            >
-              <FaShare />
-              <Typography sx={{ ml: 1 }}>All Signals</Typography>
+            {/* Navigation Items */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+              <NavItem
+                active={active === 'users'}
+                onClick={() => {
+                  navigate('/users');
+                  setIsOpen(false);
+                }}
+                label="Users"
+                icon={<MdOutlineDashboard/>}
+              />
+              <NavItem
+                active={active === 'signals'}
+                onClick={() => {
+                  navigate('/home');
+                  setIsOpen(false);
+                }}
+                label="Signals"
+                icon={<AiOutlineRead />}
+              />
+              {/* <NavItem
+                active={active === 'my-signals'}
+                onClick={() => {
+                  navigate('/my-signals');
+                  setIsOpen(false);
+                }}
+                label="My Signals"
+                icon={<AiTwotoneFolderOpen />}
+              /> */}
+              {/* <NavItem
+                active={active === 'my-campaign'}
+                onClick={() => {
+                  navigate('/my-campaign');
+                  setIsOpen(false);
+                }}
+                label="Analysis"
+                icon={<IoAnalytics />}
+              /> */}
+              <NavItem
+                active={active === 'settings'}
+                onClick={() => {
+                  navigate('/settings');
+                  setIsOpen(false);
+                }}
+                label="Settings"
+                icon={<CiSettings />}
+              />
             </Box>
 
-
-            <Box
-              py={1} px={3} mx={1}
-              onClick={() => navigate("/settings")}
-              sx={{ 
-                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-                borderRadius: "8px",
-                width:"max-content",
-                transition: "all 0.3s ease",
-                backgroundColor: active === "settings" ? "#D3D3D355" : "transparent",
-                "&:hover": {
-                  backgroundColor: active === "settings" ? "#D3D3D355" : "#D3D3D325"
-                },
-              }}
-            >
-              {/*<FaShare />*/}
-              <Typography sx={{ ml: 1 }}>Settings</Typography>
-            </Box>
-
-            {/*<Box
-              py={1} px={3} mx={1}
-              onClick={() => navigate("/dash")}
-              sx={{ 
-                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-                borderRadius: "8px",
-                width:"max-content",
-                transition: "all 0.3s ease",
-                backgroundColor: active === "dash" ? "#D3D3D355" : "transparent",
-                "&:hover": {
-                  backgroundColor: active === "dash" ? "#D3D3D355" : "#D3D3D325"
-                },
-              }}
-            >
-              
-              <Typography sx={{ ml: 1 }}>Saved Signals</Typography>
-            </Box>*/}
-           {/*
-            <Box
-              py={1} px={3} mx={1}
-              onClick={() => navigate("/users")}
-              sx={{ 
-                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-                borderRadius: "8px",
-                transition: "all 0.3s ease",
-                backgroundColor: active === "users" ? "#D3D3D355" : "transparent",
-                "&:hover": {
-                  backgroundColor: active === "users" ? "#D3D3D355" : "#D3D3D325"
-                },
-              }}
-            >
-              <TiFlowMerge />
-              <Typography sx={{ ml: 1 }}>Users</Typography>
-            </Box>
-            */}
+            {/* Logout */}
+            {/* <Box mt={2}>
+              <NavItem
+                active={false}
+                onClick={() => {
+                  dispatch(clearUser());
+                  navigate('/login');
+                  notifySuccessFxn('Logged Out!');
+                  setIsOpen(false);
+                }}
+                label="Log out"
+                icon={<FaPowerOff />}
+                overrideStyles={{
+                  position: 'relative',
+                }}
+              />
+            </Box> */}
           </Box>
+        </StyledToolbar>
+      </Box>
+    </>
+  );
+};
 
-          {/* Right: Can be empty or something later */}
-          <Box>
-         
-         {
-            <Box
-              py={1} px={3} mx={1}
-              onClick={() => {dispatch(clearUser()); navigate('/login') ; notifySuccessFxn("Logged Out!") } }
-              sx={{ 
-                position:"relative",
-                left:"60%",
-                width:"10rem",
-                display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer",
-                borderRadius: "8px",
-                transition: "all 0.3s ease",
-                backgroundColor: active === "users" ? "#D3D3D355" : "transparent",
-                "&:hover": {
-                  backgroundColor: active === "users" ? "#D3D3D355" : "#D3D3D325"
-                },
-              }}
-            >
-              <FaPowerOff />
-              <Typography sx={{ ml: 1 }}>Log out</Typography>
-            </Box>
-            }
-
-
-          </Box>
-        </Box>
-
-    
-        
-      </StyledToolbar>
-    </AppBar>
+const NavItem = ({ onClick, label, icon, active, overrideStyles = {} }) => {
+  return (
+    <Box
+      py={1}
+      // px={3}
+      // mx={1}
+      onClick={onClick}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        cursor: 'pointer',
+        borderRadius: '8px',
+        paddingLeft: 1,
+        width: '150%',
+        transition: 'all 0.3s ease',
+        backgroundColor: active ? '#D3D3D355' : 'transparent',
+        '&:hover': {
+          backgroundColor: active ? '#D3D3D355' : '#D3D3D325',
+        },
+        ...overrideStyles,
+      }}
+    >
+      {icon}
+      <Typography sx={{ ml: icon ? 1 : 0 }}>{label}</Typography>
+    </Box>
   );
 };
 

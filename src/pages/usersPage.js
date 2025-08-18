@@ -84,7 +84,7 @@ console.log("Fetched All Users ===========>>>>>>>>>>", allUsers);
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={"background.default"} sx={{height:"100vh"}} >
+      <Box bgcolor={"background.default"} sx={{height:"100vh",  marginLeft: '11%', width: 'calc(100% - 15%)',}} >
         <Navbar active="users" />
 
         <ScreenSearchComponent title="Users" />
