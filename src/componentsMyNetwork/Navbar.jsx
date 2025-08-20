@@ -163,7 +163,7 @@ const Navbar = ({ active }) => {
                   navigate('');
                   setIsOpen(false);
                 }}
-                label="Dashboard menu item"
+                label="Dashboard"
                 icon={<AiTwotoneFolderOpen />}
               />
               {/* <NavItem

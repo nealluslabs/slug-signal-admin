@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 import { saveFarmerInFocus } from 'src/redux/reducers/group.slice';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { fetchFarmerById } from 'src/redux/actions/group.action';
 
@@ -43,12 +43,11 @@ const columns = !isMobile
             return user;
           };
 
-            const firstName =user?.firstName + user?.lastName;
+          const firstName = user?.firstName + user?.lastName;
           return (
             <div
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100 }}
             >
-            
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <div>{/*THE NUMBERS SHOULD GO HERE */}</div>
               </div>
@@ -92,12 +91,7 @@ const columns = !isMobile
         width: 290,
         height: 450,
         renderCell: (params) => {
-          return (
-            <div style={{ fontSize: '1rem', color: 'black' }}>
-              {' '}
-              {params.row.email}
-            </div>
-          );
+          return <div style={{ fontSize: '1rem', color: 'black' }}> {params.row.email}</div>;
         },
       },
       {
@@ -106,12 +100,7 @@ const columns = !isMobile
         width: 290,
         height: 450,
         renderCell: (params) => {
-          return (
-            <div style={{ fontSize: '1rem', color: 'black' }}>
-              {' '}
-              {params.row.accountCreated}
-            </div>
-          );
+          return <div style={{ fontSize: '1rem', color: 'black' }}> {params.row.accountCreated}</div>;
         },
       },
       {
@@ -133,7 +122,7 @@ const columns = !isMobile
             return params.row.index;
           };
 
-        //   const email = `${params.email}`;
+          //   const email = `${params.email}`;
           return (
             <div
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100 }}
@@ -197,8 +186,8 @@ export default function UserStatsTable({ user }) {
               color: 'black',
               fontWeight: 'bold',
               borderBottom: 'none', // removes header bottom border
-               fontSize: '1.2rem',
-               fontWeight: 700,
+              fontSize: '1.2rem',
+              fontWeight: 700,
             },
             '& .MuiDataGrid-row': {
               color: 'black',
@@ -232,7 +221,7 @@ export default function UserStatsTable({ user }) {
               return {
                 ...col,
                 renderCell: (params) => (
-                  <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%', }}>
+                  <div style={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }}>
                     {
                       <Button
                         onClick={() => {
@@ -286,11 +275,12 @@ export default function UserStatsTable({ user }) {
                         fontSize: '1rem',
                       }}
                     >
-                    {params.row.firstName
-                      .split(" ")
-                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                      .join(" ")}                    
-                      </span>
+                      {params.row.firstName?
+                        params.row.firstName
+                        .split(' ')
+                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                        .join(' ') : ''}
+                    </span>
                     <span
                       style={{
                         display: 'flex',
@@ -301,11 +291,13 @@ export default function UserStatsTable({ user }) {
                         fontSize: '1rem',
                       }}
                     >
-                    {params.row.lastName
-                      .split(" ")
-                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                      .join(" ")}                    
-                      </span>
+                      {params.row.lastName
+                        ? params.row.lastName
+                            .split(' ')
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                            .join(' ')
+                        : ''}
+                    </span>
                   </div>
                 ),
               };
