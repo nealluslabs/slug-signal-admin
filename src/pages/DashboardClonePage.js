@@ -86,19 +86,13 @@ const navigate = useNavigate()
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={"background.default"} color={"text.primary"}  style={{height:"100vh"}}>
+      <Box bgcolor={"background.default"} color={"text.primary"}  style={{height:"100vh", marginLeft: '10%', width: 'calc(100% - 20%)',}}>
         <Navbar active="dashboard" />
 
+        {/* <ScreenSearchComponent title="Trends" /> */}
          { 
-                   <Box
-                        sx={{
-                            position: "absolute",
-                            top: "5rem",
-                            left: "5rem",
-                           
-                            p: 2,
-                        }}
-                    >
+                   <Box sx={{ display: "flex", justifyContent: "flex-start", px: "88px",pt: "58px", mb: 2 }}>
+
                         <Button 
                             sx={{ 
                                 display: "flex", alignItems: "center",justifyContent:"center", cursor: "pointer", borderRadius: "8px", 
@@ -112,7 +106,6 @@ const navigate = useNavigate()
                         </Box>
                     }
 
-        <ScreenSearchComponent title="Trends" />
 
         <Box
           mx="88px"

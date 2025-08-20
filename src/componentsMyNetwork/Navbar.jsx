@@ -149,23 +149,23 @@ const Navbar = ({ active }) => {
                 icon={<MdOutlineDashboard/>}
               />
               <NavItem
-                active={active === 'signals'}
+                active={active === 'dashboard'}
                 onClick={() => {
-                  navigate('/home');
+                  navigate('/all-signals');
                   setIsOpen(false);
                 }}
-                label="Signals"
+                label="All Signals"
                 icon={<AiOutlineRead />}
               />
-              {/* <NavItem
-                active={active === 'my-signals'}
+              <NavItem
+                active={active === 'Dashboard menu'}
                 onClick={() => {
-                  navigate('/my-signals');
+                  navigate('');
                   setIsOpen(false);
                 }}
-                label="My Signals"
+                label="Dashboard menu item"
                 icon={<AiTwotoneFolderOpen />}
-              /> */}
+              />
               {/* <NavItem
                 active={active === 'my-campaign'}
                 onClick={() => {
@@ -212,29 +212,27 @@ const Navbar = ({ active }) => {
 
 const NavItem = ({ onClick, label, icon, active, overrideStyles = {} }) => {
   return (
-    <Box
-      py={1}
-      // px={3}
-      // mx={1}
-      onClick={onClick}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        cursor: 'pointer',
-        borderRadius: '8px',
-        paddingLeft: 1,
-        width: '150%',
-        transition: 'all 0.3s ease',
-        backgroundColor: active ? '#D3D3D355' : 'transparent',
-        '&:hover': {
-          backgroundColor: active ? '#D3D3D355' : '#D3D3D325',
-        },
-        ...overrideStyles,
-      }}
-    >
-      {icon}
-      <Typography sx={{ ml: icon ? 1 : 0 }}>{label}</Typography>
-    </Box>
+<Box
+  onClick={onClick}
+  sx={{
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    borderRadius: '8px',
+    width: '100%',
+    padding: '8px 12px', 
+    boxSizing: 'border-box',
+    transition: 'all 0.3s ease',
+    backgroundColor: active ? '#D3D3D355' : 'transparent',
+    '&:hover': {
+      backgroundColor: active ? '#D3D3D355' : '#D3D3D325',
+    },
+    ...overrideStyles,
+  }}
+>
+  {icon}
+  <Typography sx={{ ml: 2 }}>{label}</Typography> 
+</Box>
   );
 };
 

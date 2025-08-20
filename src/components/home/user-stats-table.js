@@ -43,7 +43,7 @@ const columns = !isMobile
             return user;
           };
 
-            const firstName =user?.firstName;
+            const firstName =user?.firstName + user?.lastName;
           return (
             <div
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100 }}
@@ -61,29 +61,31 @@ const columns = !isMobile
                   textAlign: 'left',
                   width: '40px',
                   fontSize: '1rem',
+                  // gap: '0.5rem',
                 }}
               >
                 {firstName.toUpperCase()}
+                {/* {lastName.toUpperCase()} */}
               </span>
             </div>
           );
         },
       },
-      {
-        field: 'image',
-        headerName: 'Image',
-        width: 290,
-        height: 450,
-        renderCell: (params) => {
-          return (
-            <div style={{ fontSize: '1rem', color: 'black', width: 70, height: 70 }}>
-              {' '}
-              {/* {params.row.startDate && new Date(params.row.startDate).toDateString()} */}
-              <img src={params.row.image} style={{borderRadius: 50}}/>
-            </div>
-          );
-        },
-      },
+      // {
+      //   field: 'image',
+      //   headerName: 'Image',
+      //   width: 290,
+      //   height: 450,
+      //   renderCell: (params) => {
+      //     return (
+      //       <div style={{ fontSize: '1rem', color: 'black', width: 70, height: 70 }}>
+      //         {' '}
+      //         {/* {params.row.startDate && new Date(params.row.startDate).toDateString()} */}
+      //         <img src={params.row.image} style={{borderRadius: 50}}/>
+      //       </div>
+      //     );
+      //   },
+      // },
       {
         field: 'email',
         headerName: 'User Email',
@@ -94,6 +96,20 @@ const columns = !isMobile
             <div style={{ fontSize: '1rem', color: 'black' }}>
               {' '}
               {params.row.email}
+            </div>
+          );
+        },
+      },
+      {
+        field: 'Onboarded',
+        headerName: 'Onboarded',
+        width: 290,
+        height: 450,
+        renderCell: (params) => {
+          return (
+            <div style={{ fontSize: '1rem', color: 'black' }}>
+              {' '}
+              {params.row.accountCreated}
             </div>
           );
         },
@@ -270,7 +286,22 @@ export default function UserStatsTable({ user }) {
                         fontSize: '1rem',
                       }}
                     >
-                    {params.row.user
+                    {params.row.firstName
+                      .split(" ")
+                      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                      .join(" ")}                    
+                      </span>
+                    <span
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        // justifyContent: 'flex-end',
+                        // textAlign: 'left',
+                        flex: 1, // lets the text fill the available cell space
+                        fontSize: '1rem',
+                      }}
+                    >
+                    {params.row.lastName
                       .split(" ")
                       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                       .join(" ")}                    

@@ -84,7 +84,7 @@ const navigate = useNavigate()
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={"background.default"} color={"text.primary"}  style={{height:"100vh",  marginLeft: '11%', width: 'calc(100% - 15%)',}}>
+      <Box bgcolor={"background.default"} color={"text.primary"}  style={{height:"100vh", marginLeft: '11%', width: 'calc(100% - 15%)',}}>
         <Navbar active="dashboard" />
 
         <ScreenSearchComponent title="Trends" />

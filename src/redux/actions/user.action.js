@@ -1,22 +1,22 @@
 import {fetchUsersPending, fetchUsersSuccess, fetchUsersFailed, fetchRealTimeUsersSuccess, fetchConnectedUserSuccess,
     initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearUser, resetConnects} from '../reducers/user.slice';
- import { updateUsedConnection } from '../reducers/auth2.slice';
+//  import { updateUsedConnection } from '../reducers/auth2.slice';
     import { db, fb, auth, storage } from '../../config/firebase';
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from '../reducers/chat.slice';
   
 
-export const fetchAllUsers = (uid) => async (dispatch) => {
+export const fetchAllUsers = () => async (dispatch) => {
     dispatch(fetchUsersPending());
     // db.collection('users').where("uid", "!=", fb.auth().currentUser.uid)
     var fetchUsers = db.collection('users')
     // fetchUsers = fetchUsers.where("uid", "!=", uid)
-    fetchUsers = fetchUsers.where("intro", "!=", null)
+    // fetchUsers = fetchUsers.where("intro", "!=", null)
     fetchUsers.get()
     .then((snapshot) => {
         const users = snapshot.docs.map((doc) => ({ ...doc.data() }));
-        const filteredUser = users.filter(user => user.uid != uid);
+        const filteredUser = users.filter(user => user );
         console.log('Filtered User\'s', filteredUser );
         // }
         // dispatch(fetchUsersSuccess(users));
@@ -50,109 +50,109 @@ export const fetchRealTimeUsers = (uid) => async (dispatch) => {
 };
 
 
-export const initiateConnection = (type, user1, user2, usedConnection) => (dispatch) => {
-    dispatch(fetchConnection(user1, user2, type, usedConnection));
-};
+// export const initiateConnection = (type, user1, user2, usedConnection) => (dispatch) => {
+//     dispatch(fetchConnection(user1, user2, type, usedConnection));
+// };
 
 
-  export const fetchConnection = (user1, user2, type, usedConnection) => async (dispatch) => {
-        var connect = db.collection("connections")
-        connect = connect.where("user1", "==", user1)
-        connect = connect.where("user2", "==", user2)
-        // connect = connect.where("type", "==", type)
-        connect.get()
-        .then((querySnapshot) => {
-            if(querySnapshot.empty){
-                console.log("No such document");
-                const res = db.collection('connections').add({
-                user1: user1,
-                user2: user2, 
-                type: type, 
-                status: 'pending', 
-                invited_amt: type == 1 ? 1 : 0, 
-                skipped_amt: type == 0 ? 1 : 0,
-                })
-                .then((docRef) => {
-                  console.log("created new connection successfully!");
-                  const messageText = 'Hello, I will like to connect with you. Kindly accept my Invite. Cheers!';
-                  dispatch(sendChat({
-                        messageText,
-                        user1: user1,
-                        user2: user2,
-                      }))
-                 //after sending default chat message, then update usedConnection
+//   export const fetchConnection = (user1, user2, type, usedConnection) => async (dispatch) => {
+//         var connect = db.collection("connections")
+//         connect = connect.where("user1", "==", user1)
+//         connect = connect.where("user2", "==", user2)
+//         // connect = connect.where("type", "==", type)
+//         connect.get()
+//         .then((querySnapshot) => {
+//             if(querySnapshot.empty){
+//                 console.log("No such document");
+//                 const res = db.collection('connections').add({
+//                 user1: user1,
+//                 user2: user2, 
+//                 type: type, 
+//                 status: 'pending', 
+//                 invited_amt: type == 1 ? 1 : 0, 
+//                 skipped_amt: type == 0 ? 1 : 0,
+//                 })
+//                 .then((docRef) => {
+//                   console.log("created new connection successfully!");
+//                   const messageText = 'Hello, I will like to connect with you. Kindly accept my Invite. Cheers!';
+//                   dispatch(sendChat({
+//                         messageText,
+//                         user1: user1,
+//                         user2: user2,
+//                       }))
+//                  //after sending default chat message, then update usedConnection
 
-                  if(type == 1){
-                    console.log('Update Used Connection:- ', docRef);
-                    var userRef = db.collection("users").doc(user1);
-                    userRef.update({
-                       usedConnection: usedConnection + 1,
-                   })
-                   .then(() => {
-                       const usedConnectionCount = usedConnection + 1;
-                     console.log('Used connection updated:- ', usedConnection);
-                     dispatch(updateUsedConnection({ usedConnectionCount }));
-                   })
-                   .catch((error) => {
-                     var errorMessage = error.message;
-                     console.log('Error updating used connection:', errorMessage);
-                   });
-                  }
+//                   if(type == 1){
+//                     console.log('Update Used Connection:- ', docRef);
+//                     var userRef = db.collection("users").doc(user1);
+//                     userRef.update({
+//                        usedConnection: usedConnection + 1,
+//                    })
+//                    .then(() => {
+//                        const usedConnectionCount = usedConnection + 1;
+//                      console.log('Used connection updated:- ', usedConnection);
+//                      dispatch(updateUsedConnection({ usedConnectionCount }));
+//                    })
+//                    .catch((error) => {
+//                      var errorMessage = error.message;
+//                      console.log('Error updating used connection:', errorMessage);
+//                    });
+//                   }
 
-                })
-                .catch((err) => {
-                  var errorMessage = err.message;
-                  console.log('error creating new connection: ', errorMessage);
-                });
-            }else{
-                //update record
+//                 })
+//                 .catch((err) => {
+//                   var errorMessage = err.message;
+//                   console.log('error creating new connection: ', errorMessage);
+//                 });
+//             }else{
+//                 //update record
 
-                 console.log('Type is: ', type);
-                querySnapshot.forEach((doc) => {
+//                  console.log('Type is: ', type);
+//                 querySnapshot.forEach((doc) => {
 
-                console.log('Fetched Doc: ', doc.data());
-                // console.log('Doc ID: ', doc.id);
-                const docID = doc.id;
-                const docType = doc.data().type;
-                const skipped_amt = doc.data().skipped_amt;
-                const invited_amt = doc.data().invited_amt;
+//                 console.log('Fetched Doc: ', doc.data());
+//                 // console.log('Doc ID: ', doc.id);
+//                 const docID = doc.id;
+//                 const docType = doc.data().type;
+//                 const skipped_amt = doc.data().skipped_amt;
+//                 const invited_amt = doc.data().invited_amt;
 
-                if(type == 1 && doc.data().type == 1 || type == 0 && doc.data().type == 1){
-                 var errorMessage = 'You have already invited this user';
-                 console.log('Error Msg: ', errorMessage);
-                 dispatch(initiateFailed({ errorMessage }));
-                }else if(type == 1 && doc.data().type == 0){
-                 var errorMessage = 'You cannot invite, untill you undo this user from skipped';
-                 console.log('Error Msg: ', errorMessage);
-                 dispatch(initiateFailed({ errorMessage }));
-                }else if(type == 0 && doc.data().type == 0){
-                  //update Firestore
-                  console.log('Type is 0: and doc data is : 0');
-                db.collection("connections").doc(docID).set({
-                user1: doc.data().user1,
-                user2: doc.data().user2,
-                type: docType,
-                status: doc.data().status,
-                invited_amt:  type == 1 ? invited_amt + 1 : invited_amt,
-                skipped_amt: type == 0 ? skipped_amt + 1 : skipped_amt,
-                }).then(() => {
-                console.log('updated connect');
-                })
-                .catch((error) => {
-                var errorMessage = error.message;
-                console.log('error updating connect: ', errorMessage);
-                });
+//                 if(type == 1 && doc.data().type == 1 || type == 0 && doc.data().type == 1){
+//                  var errorMessage = 'You have already invited this user';
+//                  console.log('Error Msg: ', errorMessage);
+//                  dispatch(initiateFailed({ errorMessage }));
+//                 }else if(type == 1 && doc.data().type == 0){
+//                  var errorMessage = 'You cannot invite, untill you undo this user from skipped';
+//                  console.log('Error Msg: ', errorMessage);
+//                  dispatch(initiateFailed({ errorMessage }));
+//                 }else if(type == 0 && doc.data().type == 0){
+//                   //update Firestore
+//                   console.log('Type is 0: and doc data is : 0');
+//                 db.collection("connections").doc(docID).set({
+//                 user1: doc.data().user1,
+//                 user2: doc.data().user2,
+//                 type: docType,
+//                 status: doc.data().status,
+//                 invited_amt:  type == 1 ? invited_amt + 1 : invited_amt,
+//                 skipped_amt: type == 0 ? skipped_amt + 1 : skipped_amt,
+//                 }).then(() => {
+//                 console.log('updated connect');
+//                 })
+//                 .catch((error) => {
+//                 var errorMessage = error.message;
+//                 console.log('error updating connect: ', errorMessage);
+//                 });
 
-               }
+//                }
 
-                });
+//                 });
                 
-            }
-        })
-        .catch((error) => {
-            console.log("Error fetching connections: ", error.message);
-        });
-};
+//             }
+//         })
+//         .catch((error) => {
+//             console.log("Error fetching connections: ", error.message);
+//         });
+// };
   
 
 export const fetchRealTimeConnections = (uid) => async (dispatch) => {
