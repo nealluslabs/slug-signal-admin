@@ -140,6 +140,15 @@ const Navbar = ({ active }) => {
             {/* Navigation Items */}
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
               <NavItem
+                active={active === 'Dashboard menu'}
+                onClick={() => {
+                  navigate('');
+                  setIsOpen(false);
+                }}
+                label="Dashboard"
+                icon={<AiTwotoneFolderOpen />}
+              />
+              <NavItem
                 active={active === 'users'}
                 onClick={() => {
                   navigate('/users');
@@ -156,15 +165,6 @@ const Navbar = ({ active }) => {
                 }}
                 label="All Signals"
                 icon={<AiOutlineRead />}
-              />
-              <NavItem
-                active={active === 'Dashboard menu'}
-                onClick={() => {
-                  navigate('');
-                  setIsOpen(false);
-                }}
-                label="Dashboard"
-                icon={<AiTwotoneFolderOpen />}
               />
               {/* <NavItem
                 active={active === 'my-campaign'}
