@@ -46,51 +46,16 @@ function UsersPage() {
   }, []);
   console.log('Fetching all users========>>>>>>>', allUsers);
 
-  const dummyUsers =
-    fetchedUsers && fetchedUsers.length
-      ? fetchedUsers
-      : [
-          {
-            id: 1,
-            fristName: 'Alice ',
-            lastName: ' Johnson',
-            email: 'alice.johnson@example.com',
-            image: 'https://randomuser.me/api/portraits/women/44.jpg',
-            accountCreated: '2024-01-15',
-          },
-          {
-            id: 2,
-            fristName: 'Bob',
-            lastName: ' Smith',
-            email: 'bob.smith@example.com',
-            image: 'https://randomuser.me/api/portraits/men/46.jpg',
-            accountCreated: '2024-02-03',
-          },
-          {
-            id: 3,
-            fristName: 'Charlie ',
-            lastName: ' Davis',
-            email: 'charlie.davis@example.com',
-            image: 'https://randomuser.me/api/portraits/men/32.jpg',
-            accountCreated: '2024-03-22',
-          },
-          {
-            id: 4,
-            fristName: 'Diana ',
-            lastName: ' Prince',
-            email: 'diana.prince@example.com',
-            image: 'https://randomuser.me/api/portraits/women/65.jpg',
-            accountCreated: '2025-04-10',
-          },
-          {
-            id: 5,
-            fristName: 'Ethan ',
-            lastName: ' Clark',
-            email: 'ethan.clark@example.com',
-            image: 'https://randomuser.me/api/portraits/men/12.jpg',
-            accountCreated: '2025-05-27',
-          },
-        ];
+  const dummyData = [
+    { id: 1, firstName: 'Alice', lastName: 'Johnson', email: 'alice.johnson@example.com', accountCreated: '2024-01-15' },
+    { id: 2, firstName: 'Bob', lastName: 'Smith', email: 'bob.smith@example.com', accountCreated: '2024-02-03' },
+    { id: 3, firstName: 'Charlie', lastName: 'Davis', email: 'charlie.davis@example.com', accountCreated: '2024-03-22' },
+    { id: 4, firstName: 'Diana', lastName: 'Prince', email: 'diana.prince@example.com', accountCreated: '2025-04-10' },
+    { id: 5, firstName: 'Ethan', lastName: 'Clark', email: 'ethan.clark@example.com', accountCreated: '2025-05-27' },
+  ];
+
+    const users = allUsers && allUsers.length > 0 ? allUsers : dummyData;
+
 
   // console.log('Fetched All Users ===========>>>>>>>>>>', allUsers);
 
@@ -117,7 +82,7 @@ function UsersPage() {
           ))} /> */}
 
           <UserStatsTable
-            user={dummyUsers.map((u) => ({
+            user={users.map((u) => ({
               id: u.id,
               firstName: u.firstName,
               lastName: u.lastName,

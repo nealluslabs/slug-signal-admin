@@ -43,10 +43,10 @@ const columns = !isMobile
             return user;
           };
 
-          const firstName = user?.firstName + user?.lastName;
+          const fullName = user?.firstName + user?.lastName;
           return (
             <div
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100 }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem', width: 100, height: 50  }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
                 <div>{/*THE NUMBERS SHOULD GO HERE */}</div>
@@ -63,7 +63,7 @@ const columns = !isMobile
                   // gap: '0.5rem',
                 }}
               >
-                {firstName.toUpperCase()}
+                {fullName.toUpperCase()}
                 {/* {lastName.toUpperCase()} */}
               </span>
             </div>
@@ -174,7 +174,7 @@ export default function UserStatsTable({ user }) {
   const [loading, setLoading] = React.useState(false);
 
   return (
-    <div style={{ height: 530, width: '100%' }}>
+    <div style={{ maxHeight: 930, width: '100%' }}>
       {!classes.row ? (
         <CircularProgress />
       ) : (
@@ -192,6 +192,9 @@ export default function UserStatsTable({ user }) {
             '& .MuiDataGrid-row': {
               color: 'black',
             },
+                '& .MuiTablePagination-root': {
+      color: 'black', // makes pagination text black
+    },
             '& .MuiDataGrid-row:nth-of-type(even)': {
               backgroundColor: '#ffffff',
             },
